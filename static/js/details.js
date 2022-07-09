@@ -49,7 +49,7 @@ var githubUsername = "yudhaputraa";
 var linkedinUsername = "yudha-putra-aprilianto";
 var githubURL = "https://github.com/yudhaputraa";
 var linkedinURL = "https://www.linkedin.com/in/yudha-putra-aprilianto-948453171/";
-var logingui = "https://www.linkedin.com/in/yudha-putra-aprilianto-948453171/";
+var logingui = "http://127.0.0.1:5000/login";
 
 // If left blank e.g. url = "" then it won't appear
 var socialMedia = [
