@@ -30,7 +30,7 @@ app.config['SECRET_KEY'] = "inirahasiaypa"
 # membuat schema model database authentikasi (login, register)
 class AuthModel(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    username = db.Column(db.String(50))
+    email = db.Column(db.String(50))
     password = db.Column(db.String(100))
     
 # membuat schema model Blog
@@ -63,38 +63,38 @@ def butuh_token(f):
 class RegisterUser(Resource):
     # posting data dari front end utk disimpan ke dalam database
     def post(self):
-        dataUsername = request.form.get('username')
+        dataEmail = request.form.get('email')
         dataPassword = request.form.get('password')
         
-        # cek apakah username & password ada
-        if dataUsername and dataPassword:
+        # cek apakah email & password ada
+        if dataEmail and dataPassword:
             # tulis data authentikasi ke db.sqlite
-            dataModel = AuthModel(username=dataUsername, password=dataPassword)
+            dataModel = AuthModel(email=dataEmail, password=dataPassword)
             db.session.add(dataModel)
             db.session.commit()
             return make_response(jsonify({"msg":"registrasi berhasil"}), 200)
         # else:
-        #     return make_response(jsonify({"msg":"form password dan username harus di isi"}))
+        #     return make_response(jsonify({"msg":"form password dan email harus di isi"}))
         
-        return make_response(jsonify({"msg":"form password dan username harus di isi"}))
+        return make_response(jsonify({"msg":"form password dan email harus di isi"}))
         
 # routing utk authentikasi : login
 class LoginUser(Resource):
     def post(self):
-        dataUsername = request.form.get('username')
+        dataEmail = request.form.get('email')
         dataPassword = request.form.get('password')
         
         # query matching kecocokan data
         # iterasi authModel
-        queryUsername = [data.username for data in AuthModel.query.all()] #list
+        queryEmail = [data.emai for data in AuthModel.query.all()] #list
         queryPassword = [data.password for data in AuthModel.query.all()] #list
-        if dataUsername in queryUsername and dataPassword in queryPassword:
+        if dataEmail in queryEmail and dataPassword in queryPassword:
             # jika login sukses
         # generate token authentikasi utk user
             token = jwt.encode(
                 {
-                    "username":queryUsername, 
-                    "exp":datetime.datetime.utcnow() + datetime.timedelta(minutes=10)
+                    "email":queryEmail, 
+                    "exp":datetime.datetime.utcnow() + datetime.timedelta(minutes=60)
                 }, 
                 app.config['SECRET_KEY'],
                 algorithm="HS256"
