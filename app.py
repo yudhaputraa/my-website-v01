@@ -186,6 +186,9 @@ def index():
 @app.route("/login")
 def login_user():
     return render_template("login_user.html")
+@app.route("/dashboard")
+def dashboard_user():
+    return render_template("dashboard.html")
 
 # inisiasi resource api
 api.add_resource(RegisterUser, "/api/register", methods=["POST"])
