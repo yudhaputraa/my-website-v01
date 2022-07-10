@@ -86,7 +86,7 @@ class LoginUser(Resource):
         
         # query matching kecocokan data
         # iterasi authModel
-        queryEmail = [data.emai for data in AuthModel.query.all()] #list
+        queryEmail = [data.email for data in AuthModel.query.all()] #list
         queryPassword = [data.password for data in AuthModel.query.all()] #list
         if dataEmail in queryEmail and dataPassword in queryPassword:
             # jika login sukses
@@ -99,7 +99,7 @@ class LoginUser(Resource):
                 app.config['SECRET_KEY'],
                 algorithm="HS256"
                 )
-            return make_response(jsonify({"msg":"login sukses", "TOKEN":token}))
+            return make_response(jsonify({"msg":"login sukses", "TOKEN":token,"User": dataEmail}))
         # jika login gagal
         return make_response(jsonify({"msg":"Login gagal, silakan coba lagi !!"}))
 
