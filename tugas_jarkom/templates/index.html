@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<title>Tugas JarKom</title>
+	<link rel="stylesheet" href="{{ url_for('static', filename='style.css')}}">
+
+</head>
+
+<body>
+	<div class="form-structor">
+		<div class="signup">
+			<form method="post" action="{{ url_for('tambah_user') }}">
+				<h2 class="form-title" id="signup"><span>or</span>Sign up</h2>
+				<div class="form-holder">
+					<input type="username" class="input" placeholder="user" name="username"/>
+					<input type="password" class="input" placeholder="password"  name="password"/>
+				</div>
+				<button class="submit-btn" type="submit">Sign up</button>
+			</form>
+		</div>
+		<div class="login slide-up">
+			<div class="center">
+				<h2 class="form-title" id="login"><span>or</span>Log in</h2>
+				<form method="post" action="{{ url_for('aksi_login') }}">
+					<div class="form-holder">
+						<input type="username" class="input" placeholder="username" name="username" />
+						<input type="password" class="input" placeholder="password" name="password" />
+					</div>
+					<button class="submit-btn" type="submit">Log in</button>
+				</form>
+			</div>
+		</div>
+	</div>
+	<!-- partial -->
+	<script src="{{ url_for('static', filename='script.js')}}"></script>
+    <script>
+        // Ambil pesan dari Flash message dan tampilkan sebagai alert box
+        var message = "{{ message }}";
+        if (message) {
+            alert(message);
+        }
+    </script>
+
+</body>
+
+</html>
